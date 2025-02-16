@@ -15,6 +15,12 @@ function Sidebar() {
         <li>
           <Link to="/dashboard">Dashboard</Link>
         </li>
+        <li>
+          <Link to="/profile">Profile</Link>
+        </li>
+        <li>
+          <Link to="/addevent">Addevent</Link>
+        </li>
       </ul>
     </nav></div>
   )

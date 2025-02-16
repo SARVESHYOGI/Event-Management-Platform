@@ -6,11 +6,11 @@ const Layout = () => {
     <>
       <div className="flex">
 
-        <div className="bg-gray-200 flex-auto w-1/4 h-screen">
+        <div className="bg-gray-200 flex-auto w-[20%] h-screen">
           <Sidebar />
         </div>
 
-        <div className="flex-auto w-3/4 h-screen ">
+        <div className="flex-auto w-[80%] h-screen ">
           <Outlet />
 
         </div>
