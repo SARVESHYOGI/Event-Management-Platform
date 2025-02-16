@@ -10,11 +10,9 @@ function Sidebar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <Link to="/login-user">Login</Link>
         </li>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
+
         <li>
           <Link to="/profile">Profile</Link>
         </li>

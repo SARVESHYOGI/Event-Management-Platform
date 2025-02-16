@@ -39,7 +39,7 @@ const Login = () => {
             Login
           </button>
         </form>
-        <Link to="/register"> register</Link>
+        <Link to="/register-user"> register</Link>
       </div>
 
     </div>

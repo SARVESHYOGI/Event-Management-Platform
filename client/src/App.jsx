@@ -3,10 +3,10 @@ import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import AddEvent from "./pages/AddEvent";
+import EventDetail from "./pages/EventDetail";
 
 
 export default function App() {
@@ -15,11 +15,11 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/register-user" element={<Register />} />
+          <Route path="/login-user" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addevent" element={<AddEvent />} />
+          <Route path="/eventdetails" element={<EventDetail />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
