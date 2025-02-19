@@ -1,6 +1,7 @@
-import User from '../models/user.models.js';
+import User from '../models/User.models.js';
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import generatedAccessToken from '../utils/generatedAccessToken.js';
+import generatedRefreshToken from '../utils/generatedRefreshToken.js';
 
 export async function getusers(req, res) {
   try {
@@ -44,6 +45,53 @@ export async function loginuser(req, res) {
     if (!validpassword) {
       return res.status(400).send("Invalid Password");
     }
+
+    const accesstoken = await generatedAccessToken(user._id)
+    const refreshToken = await generatedRefreshToken(user._id)
+
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None"
+    }
+    res.cookie('accessToken', accesstoken, cookiesOption)
+    res.cookie('refreshToken', refreshToken, cookiesOption)
+
+    return res.json({
+      message: "Login successfully",
+      error: false,
+      success: true,
+      data: {
+        accesstoken,
+        refreshToken
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function logoutuser(req, res) {
+  try {
+    const userid = req.userId
+
+    const cookiesOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None"
+    }
+    res.clearCookie('accessToken', cookiesOption)
+    res.clearCookie('refreshToken', cookiesOption)
+
+    const removeToken = await User.findByIdAndUpdate(userid, {
+      refresh_token: ""
+    })
+    return res.json({
+      message: "Logout successfully",
+      error: false,
+      success: true
+    })
 
   } catch (error) {
     console.log(error);
