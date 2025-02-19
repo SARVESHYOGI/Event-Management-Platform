@@ -17,10 +17,7 @@ const eventSchema = new Schema({
     type: Date,
     required: true
   },
-  // price: {
-  //   type: Number,
-  //   required: true
-  // },
+
   image: {
     type: String,
     required: true
@@ -28,7 +25,11 @@ const eventSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  // price: {
+  //   type: Number,
+  //   required: true
+  // },
 }, {
   timestamps: true
 });
