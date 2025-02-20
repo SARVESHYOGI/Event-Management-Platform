@@ -35,3 +35,16 @@ export async function createEvent(req, res) {
     console.log(error);
   }
 }
+
+export async function deleteEvent(req, res) {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ message: "Event id is required" });
+    }
+    await EventModels.findByIdAndDelete(id);
+    return res.status(200).json({ message: "Event deleted successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+}
