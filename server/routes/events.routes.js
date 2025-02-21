@@ -1,5 +1,5 @@
 import express from 'express';
-import { getEvents, createEvent, deleteEvent } from '../controllers/events.controller.js';
+import { getEvents, createEvent, deleteEvent, editevent } from '../controllers/events.controller.js';
 import upload from '../middlewares/multer.js';
 import auth from '../middlewares/auth.js';
 
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 router.get('/getevents', getEvents);
 router.post('/createevent', auth, upload.single("image"), createEvent);
 router.delete('/deleteevent/:id', auth, deleteEvent);
-
+router.put('/editevent/:id', auth, editevent);
 
 
 

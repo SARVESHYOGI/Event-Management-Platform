@@ -48,3 +48,34 @@ export async function deleteEvent(req, res) {
     console.log(error);
   }
 }
+
+export async function editevent(req, res) {
+  try {
+    const { id } = req.params;
+    const { title, description, category, date } = req.body;
+    if (!id) {
+      return res.status(400).json({ message: "Event id is required" });
+    }
+    const event = await EventModels.findById(id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    let cloudinaryResult = "";
+    const image = req.file;
+    if (image) {
+      cloudinaryResult = await uploadFileToCloudinary(image);
+      console.log(cloudinaryResult);
+    }
+
+    const update = await EventModels.updateOne({ _id: id }, {
+      ...(title && { title }),
+      ...(description && { description }),
+      ...(category && { category }),
+      ...(date && { date }),
+      ...(image && { image: cloudinaryResult.secure_url })
+    });
+    return res.status(200).json({ message: "Event updated successfully", event });
+  } catch (error) {
+    console.log(error);
+  }
+}
