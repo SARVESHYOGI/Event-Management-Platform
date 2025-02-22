@@ -1,9 +1,31 @@
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast";
+import SummaryApi from "../common/SummaryApi";
+import axios from "axios";
+import { baseURL } from "../common/SummaryApi";
+
 
 const Register = () => {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios({
+        method: SummaryApi.register.method,
+        url: `${baseURL}${SummaryApi.register.url}`,
+        data,
+        withCredentials: true, // Ensures cookies are sent
+      });
+
+      console.log("Registration successful:", response.data);
+      toast.success(response?.data?.message || "Registration successful!");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      toast.error(error?.response?.data?.message || "Registration failed. Please try again.");
+    }
+  };
+
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">

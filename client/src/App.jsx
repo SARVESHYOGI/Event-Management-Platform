@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import AddEvent from "./pages/AddEvent";
 import EventDetail from "./pages/EventDetail";
+import { Toaster } from 'react-hot-toast';
 
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
+      <div><Toaster /></div>
     </BrowserRouter>
   );
 }
